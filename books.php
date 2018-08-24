@@ -70,7 +70,10 @@
 			} else {$auth = "Отсутствует!";}
 
 			//передаем данные в файл с переносом строки
-			echo "$id, $title, $authors\n";
+			$str = $id.", ".$title.", ".$authors."\n";
+			file_put_contents('books.csv',[$str], FILE_APPEND);
+
 		}
+		var_dump("Посмотри в файл books.csv");
 	}
 ?>
