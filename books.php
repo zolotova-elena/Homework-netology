@@ -7,7 +7,7 @@
 		if ( $i != count($argv)-1) $q = $q.$argv[$i]." ";
 		else $q = $q." ".$argv[$i];
 	}
-	//$q = "винни пух";
+	if (!$q) {var_dump("Введите что-то в поиск"); die;}
 	
 	$url = "https://www.googleapis.com/books/v1/volumes?q=".urlencode($q);
 	$data = @file_get_contents($url);
