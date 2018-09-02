@@ -6,20 +6,34 @@
 	</head>
 	<body>
 
-		<form id="smartForm" action="" method="post" enctype="multipart/form-data" action="./admin.php">
-			<input name="upl" type="file"/>
-			<input class="smartButton" type="submit" value="ОТПРАВИТЬ" name="submit"/>
+		<form enctype="multipart/form-data"  method="post" action="">
+		    Отправить этот файл: <input name="userfile" type="file" />
+		    <input type="submit" value="Отправить файл" />
 		</form>
 		
 	</body>
 </html>
 
-<?
-	if (!empty($_FILES)){
-		if (array_key_exists('upl', $_FILES)){
-		    $tmp_name = $_FILES["upl"]['name']; 
-		    $uploads_dir = './list/$tmp_name';  
-		    move_uploaded_file($tmp_name, "$uploads_dir");
+<?php
+	echo "<a href=list.php>К списку тестов</a><br>";
+	if (isset($_FILES['userfile'])){
+		$errors = array();
+		$file_name = $_FILES['userfile']['name'];
+		$file_size = $_FILES['userfile']['size'];
+		$file_tmp = $_FILES['userfile']['tmp_name'];
+		$file_type = $_FILES['userfile']['type'];
+		$file_ext = strtolower(end(explode('.', $_FILES['userfile'])));
+		$expensions = array("json");
+
+		if ($file_size > 2097152){
+			$errors[] = 'Файл должен быть 2мб';
+		}
+
+		if (empty($errors) == true){
+			move_uploaded_file($file_tmp, "list/".$file_name);
+			echo "Успех";
+		} else {
+			print_r ($errors);
 		}
 	}
 ?>
