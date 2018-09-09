@@ -17,22 +17,32 @@
 	    		$json = file_get_contents("$filelist[0]");
 	    		$json = json_decode($json, true);
 
-	    		?> <form action="" method="POST">	<?
+	    		?> 
+	    		<form action="" method="POST">	
+	    		<?
+
 	    		$curAns = array();
 	    		for ($i = 0; $i < count($json); $i++){
 	    			$ques = $json[$i];
 	    			$curAns[$i] = $ques['cur_ans'];
 
-	    			?>
+	    		?>
 					<fieldset>
 						<legend> <? echo $ques['question'] ?> </legend>
-						<label><input type="radio" name="<? echo "q$i" ?>" value="<? echo $ques['answer1'] ?>"> <? echo $ques['answer1'] ?></label>
-						<label><input type="radio" name="<? echo "q$i" ?>" value="<? echo $ques['answer2'] ?>"> <? echo $ques['answer2'] ?></label>
-						<label><input type="radio" name="<? echo "q$i" ?>" value="<? echo $ques['answer3'] ?>"> <? echo $ques['answer3'] ?></label>
-						<label><input type="radio" name="<? echo "q$i" ?>" value="<? echo $ques['answer4'] ?>"> <? echo $ques['answer4'] ?></label>
+					
+				<?		
+						for($j = 1; $j < (count($ques)-1); $j++){
+				?>
+							<label><input type="radio" name="<?= "q$i" ?>" value="<?= $ques["answer".$j] ?>"> <? echo $ques["answer".$j] ?></label>
+				<?
+						}
+						?>
+						<!---->
 					</fieldset>			
-					<? 
+				<?
+
 				} 
+
 				?>
 					<input type="submit" value="Отправить">  
 				</form>
