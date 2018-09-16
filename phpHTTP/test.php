@@ -1,11 +1,13 @@
 <?php 
+	header('Content-Type: text/html; charset= utf-8');
 	$testNumber = $_GET['x'];
 	//echo "Номер: $testNumber";
 	$filelist = glob("list/Test_$testNumber.json");
 	//print_r($filelist);
 
 	if (!$filelist){ //echo "Теста с таким номером нет"; 
-		header('Location: http://phphttp/err404.php');
+		header("HTTP/1.0 404 Not Found");
+		echo '<h3>Неправильный номер теста!</h3>';
 	} else {
 	echo "<a href=list.php>Все тесты</a><br>";
 	$json = file_get_contents("$filelist[0]");
@@ -55,9 +57,10 @@
 				}
 
 				if ($_POST["name"]){
-					$name = $_POST["name"];
-					echo "<h3>".$_POST["name"].", результат: ".round($res*100/count($json))."%</h3>";
-					 echo "<a href=./logo.php?n=$name>Сертификат</a><br>";
+					$name = $_POST["name"]."%";
+					$res = round($res*100/count($json));
+					echo "<h3>".$_POST["name"].", результат: ".$res."</h3>";
+					echo "<a href=./logo.php?n=$name&r=$res>Сертификат</a><br>";
 				} else {echo "Не забудьте ввести свое Имя!";}
 	    		
 	    	} 

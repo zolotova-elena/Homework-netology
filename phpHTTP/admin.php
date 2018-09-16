@@ -15,7 +15,7 @@
 		if (empty($errors) == true){
 			move_uploaded_file($file_tmp, "list/".$file_name);
 			//if (move_uploaded_file($file_tmp, "list/".$file_name)){
-				header('Location: http://phphttp/list.php');
+				header('Location: list.php');
 			//}
 			//echo "Успех";
 			exit();
