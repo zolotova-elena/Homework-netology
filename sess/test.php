@@ -60,7 +60,14 @@
 					}
 				}
 
-				echo "<h3>".getAuthrizedUser()["username"].", результат: ".round($res*100/count($json))."%</h3>";
+				if (!empty($_SESSION['user'])) {
+					$name = getAuthrizedUser()["username"];
+				} 
+				else {
+					$name = $_SESSION['name'];
+				}
+
+				echo "<h3>".$name.", результат: ".round($res*100/count($json))."%</h3>";
 				echo "<a href=./logo.php?n=$name>Сертификат</a><br>";
 	    		
 	    	} 

@@ -32,8 +32,17 @@
 	}
 
 	function isAuthrized(){
-		return !empty($_SESSION['user']);
+		return  checkAuthriz() !== null;
 	}
+
+	function checkAuthriz()
+	{
+	    if (empty($_SESSION)) {
+	        return null;
+	    }
+	    return $_SESSION;
+	}
+
 
 	function getAuthrizedUser(){
 		var_dump($_SESSION['user']);
@@ -43,4 +52,8 @@
 	function logout(){
 		session_destroy();
 	}
+	function getParam($name){
+    return filter_input(INPUT_POST, $name);
+}
+
 ?>
