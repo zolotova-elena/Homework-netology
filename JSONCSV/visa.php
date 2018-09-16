@@ -12,7 +12,9 @@
 		while ( ( $csv = fgetcsv($handle, 1000, ",") ) !== false ) {
 			//var_dump($csv[1]);
 			if ($csv[1] == $contryRes){
-				echo "$contryRes: $csv[4]"; die;
+				echo "$contryRes: $csv[4]";  
+				fclose($handle);
+				die;
 			}
 		}
 
