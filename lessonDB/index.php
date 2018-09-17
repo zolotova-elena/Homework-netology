@@ -4,7 +4,7 @@
     $connection->set_charset('utf8');
     if ($connection == false)
     {
-        echo "РќРµ СѓРґР°Р»РѕСЃСЊ РїРѕРґРєР»СЋС‡РёС‚СЊСЃСЏ Рє Р‘Р”! </br>";
+        echo "Не удалось подключиться к БД! </br>";
         echo mysqli_connect_error();
         exit();
     } 
@@ -26,29 +26,27 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <h1>Р‘РёР±Р»РёРѕС‚РµРєР° СѓСЃРїРµС€РЅРѕРіРѕ С‡РµР»РѕРІРµРєР°</h1>
+        <h1>Библиотека успешного человека</h1>
         <form  method="POST">
             <input type="text" name="isbn" placeholder="isbn" value="<?php echo $isbn?>">
-            <input type="text" name="name" placeholder="РќР°Р·РІР°РЅРёРµ" value="<?php echo $name?>"> 
-            <input type="text" name="author" placeholder="РђРІС‚РѕСЂ" value="<?php echo $author?>">
-            <input type="submit" value="РќР°Р№С‚Рё">  
-            <?
+            <input type="text" name="name" placeholder="Название" value="<?php echo $name?>"> 
+            <input type="text" name="author" placeholder="Автор" value="<?php echo $author?>">
+            <input type="submit" value="Найти">  
+            <?php
                 echo '<table border="1">';
                 echo '<thead>';
                 echo '<tr>';
                 echo '<th>id</th>';
-                echo '<th>РќР°Р·РІР°РЅРёРµ</th>';
-                echo '<th>РђРІС‚РѕСЂ</th>';
-                echo '<th>Р“РѕРґ</th>';
+                echo '<th>Название</th>';
+                echo '<th>Автор</th>';
+                echo '<th>Год</th>';
                 echo '<th>isbn</th>';
-                echo '<th>Р–Р°РЅСЂ</th>';
+                echo '<th>Жанр</th>';
                 echo '</tr>';
                 echo '</thead>';
                 echo '<tbody>';
-
                 while (($record = mysqli_fetch_assoc($result)))
                 { 
-
                     echo '<tr>';
                     echo '<td>' . $record['id'] . '</td>';
                     echo '<td>' . $record['name'] . '</td>';
@@ -58,10 +56,8 @@
                     echo '<td>' . $record['genre'] . '</td>';
                     echo '</tr>';
                 }
-
                 echo '</tbody>';
                 echo '</table>';
-
                 mysqli_close($connection);
             ?>
         </form>
