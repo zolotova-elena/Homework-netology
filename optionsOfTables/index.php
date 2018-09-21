@@ -19,15 +19,13 @@
     $sql = "SHOW TABLES";
 	$tables = $pdo->prepare($sql);
 	$tables->execute();
-
-	if ( !empty($_GET['n']) and count($_GET) === 1) {
+	if ( !empty($_GET['n']) ) {
 		$tableName = $_GET['n'];
 		$thisTable = $tableName;
 		$tableInfo = $pdo->prepare("DESCRIBE $tableName");
 		$tableInfo->execute();
 	}
-
-	if ( !empty($_GET['n']) and !empty($_GET['table']) and !empty($_GET['updateField']) and count($_GET) === 3) {
+	if ( !empty($_GET['n']) and !empty($_GET['table']) and !empty($_GET['updateField'])) {
 		if (!empty($_POST['new_name'])){
 			$newName = $_POST['new_name'];
 			var_dump($newName);
@@ -39,7 +37,7 @@
 		} 
 		
 	}
-	if ( !empty($_GET['n']) and !empty($_GET['table']) and !empty($_GET['updateType']) and count($_GET) === 3) {
+	if ( !empty($_GET['n']) and !empty($_GET['table']) and !empty($_GET['updateType']) ) {
 		if (!empty($_POST['new_type'])){
 			$newType = $_POST['new_type'];
 			$name = $_GET['n'];
@@ -49,7 +47,7 @@
 			header( 'Location: ./index.php?n=$tn');
 		}
 	}
-	if ( !empty($_GET['n']) and !empty($_GET['table']) and !empty($_GET['delete']) and count($_GET) === 3) {
+	if ( !empty($_GET['n']) and !empty($_GET['table']) and !empty($_GET['delete']) ) {
 		$name = $_GET['n'];
 		$tn = $_GET['table'];
 		$stm2 = $pdo->prepare("ALTER TABLE $tn DROP COLUMN $name");
@@ -108,19 +106,31 @@
 						
 						<form  method="POST">
 							<input name="new_name" type="text" > 
-							<button type="submit"><a href="<?php echo $adres.$row['Field'].'&table='.$thisTable; ?>&action=updateField">Изменить имя</a></button>
+							<input name="n"  type="hidden" value="<?=$row['Field'];?>"> 
+							<input name="table"  type="hidden" value="<?=$thisTable;?>"> 
+							<input name="action"  type="hidden" value="updateField"> 
+							<button type="submit">Изменить имя</button>
 						</form>
 
 						<form  method="POST">
 							<input name="oldType" type="hidden" value="<?php echo $row['Type']; ?>"> 
+							<input name="n"  type="hidden" value="<?=$row['Field'];?>"> 
+							<input name="table"  type="hidden" value="<?=$thisTable;?>"> 
+							<input name="action"  type="hidden" value="updateType"> 
 							<select name="new_type">
 								<option>int(11)</option>
 								<option>VARCHAR(50)</option>
 								<option>timestamp</option>
 							</select>
-							<button type="submit"><a href="<?php echo $adres.$row['Field'].'&table='.$thisTable; ?>&action=updateType">Изменить тип</a></button>
+							<button type="submit">Изменить тип</button>
 						</form>
-					  	<a href="<?php echo $adres.$row['Field'].'&table='.$thisTable; ?>&action=delete">Удалить</a>
+						
+						<form  method="POST">
+							<input name="n"  type="hidden" value="<?=$row['Field'];?>"> 
+							<input name="table"  type="hidden" value="<?=$thisTable;?>"> 
+							<input name="action"  type="hidden" value="delete"> 
+							<button type="submit">Удалить</button>
+						</form>
 					  	
 				  	<?php
 					echo "</tr>";
