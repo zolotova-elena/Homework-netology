@@ -1,9 +1,11 @@
 <?php 
+
 	require_once 'functions.php';
 	if (!isAuthrized()){
 		http_response_code(403);
 		die('Доступ запрещен');
 	}
+
 
 	$testNumber = $_GET['x'];
 	//echo "Номер: $testNumber";

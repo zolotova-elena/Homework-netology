@@ -1,4 +1,5 @@
 <?
+
 	require_once'functions.php';
 
 	if (!isAuthrized()) {
@@ -10,25 +11,29 @@
 	if (!empty($_SESSION['user'])) {
 		echo "<h3>Вы вошли как зарегистрированный пользователь!</h3>";
 		echo "<a href=admin.php>Загрузить тест</a><br>";
+		showTests();
 	} 
 	else {
 		echo "<h3>Вы вошли как гость!</h3>";
+		showTests();
 	}
-	//showTests();
 
-?>
+	if ( !empty($_POST) ) { 
+		$arrForDel = $_POST;
+		//var_dump($_POST);
+		foreach ($arrForDel as $key => $value) {
+			unlink('list/'.$_POST[$key].'.json');
+		}
+		//header("Refresh:0");
+		
+		showTests();
+	}
 
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-	<meta charset="UTF-8">
-	<title>Список тестов</title>
-</head>
-<body>
-	<form method="POST">
-	<?
-	echo "<a href=./err404.php>Несуществующий тест</a><br>";
-	//function showTests(){
+	function showTests(){
+
+		?>
+		<form method="POST" action="list.php">
+		<?php
 		$filelist = glob("list/*.json");
 	    foreach ($filelist as $filename){
 	    	
@@ -45,22 +50,32 @@
 	        echo "<a href=./test.php?x=$testNumber> Test_$testNumber</a><br>";
 
 		}
+		if (!empty($_SESSION['user'])) {
 		?>
 
 			<input type="submit" value="Удалить" >
+		<?php
+		}
+		?>	
 		</form>
 
 		<?
-	//}
-		if ( !empty($_POST) ) { 
-			$arrForDel = $_POST;
-			foreach ($arrForDel as $key => $value) {
-				unlink('list/'.$_POST[$key].'.json');
-			}
-			//showTests();
-		}
+	}
 
-	?>
+
+
+
+	//showTests();
+
+?>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Список тестов</title>
+</head>
+<body>
 
 	<a href="logout.php"><button>Выход из системы</button></a>
 </body>

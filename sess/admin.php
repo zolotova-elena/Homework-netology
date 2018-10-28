@@ -1,4 +1,13 @@
 <?php
+	require_once 'functions.php';
+	header('Content-Type: text/html; charset= utf-8');
+
+	//var_dump ( $_SESSION["user"]['username'] );
+	if ( empty( $_SESSION["user"]['username'] ) ){
+		http_response_code(403);
+		die('Доступ запрещен');
+	}
+
 	if (isset($_FILES['userfile'])){
 		$errors = array();
 		$file_name = $_FILES['userfile']['name'];

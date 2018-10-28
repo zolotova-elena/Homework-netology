@@ -52,8 +52,15 @@
 	function logout(){
 		session_destroy();
 	}
+
 	function getParam($name){
-    return filter_input(INPUT_POST, $name);
-}
+    	return filter_input(INPUT_POST, $name);
+	}
+
+	function location($path)
+	{
+	    header("Location: $path.php");
+	    die;
+	}
 
 ?>
