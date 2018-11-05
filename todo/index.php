@@ -39,6 +39,7 @@ if (!empty($_POST['sort']) && !empty($_POST['sort_by'])) {
 		$statement = $pdo->prepare($sql);
 		$statement->execute();
 } else {
+		//var_dump($userId);
 		$sql = "SELECT * FROM task WHERE user_id=$userId";
 		$statement = $pdo->prepare($sql);
     	$statement->execute();
@@ -63,11 +64,11 @@ if (!empty($_POST['sort']) && !empty($_POST['sort_by'])) {
 		$astat11 = $pdo->prepare($sql11);
     	$astat11->execute();
     	$res = $astat11->fetchAll(PDO::FETCH_ASSOC);
-    	var_dump($res);
+    	//var_dump($res);
 
 
 	    //количество дел
-	    $sql1 = "SELECT count(*) FROM task WHERE task.user_id =$userId OR task.assigned_user_id =$userId";
+	    $sql1 = "SELECT count(*) AS C FROM task WHERE task.user_id =$userId OR task.assigned_user_id =$userId";
 		$astat1 = $pdo->prepare($sql1);
     	$astat1->execute();
     	$coun = $astat1->fetchAll(PDO::FETCH_ASSOC);
@@ -146,12 +147,15 @@ if (!empty($_POST['sort']) && !empty($_POST['sort_by'])) {
 					<form action="index.php" method="POST">
 						<input name="task_id" type="hidden" value="<?php echo $row['id']; ?>"> 
 						<select name="assigned_user_id">
-						<?php foreach ($assignedUserList as $assignedUser){ var_dump($assignedUserList[$assignedUser])?>
+						<?php foreach ($assignedUserList as $assignedUser){ 
+							var_dump($assignedUserList[$assignedUser])?>
 						  <option <?php if ($task['assigned_user_id'] == $assignedUser['id']): ?>
 						    selected<?php endif; ?> value="<?= $assignedUser['id'] ?>">
 						    <?= $assignedUser['login'] ?>
 						  </option>
-						<?php } ?>
+						<?php 
+						} 
+						?>
 						</select>
 						<button type="submit">Делегировать</button>
 					</form>
@@ -168,6 +172,9 @@ if (!empty($_POST['sort']) && !empty($_POST['sort_by'])) {
 			<?php } ?>
 		</table>
 
-		<h3>Итого дел: <?php echo $coun[0]['count(*)']; ?></h3>
+		<h3>Итого дел: <?php  echo $coun[0]['C']; ?></h3>
+
+		<a href="logout.php">Выход</a>
+		
   </body>
 </html>

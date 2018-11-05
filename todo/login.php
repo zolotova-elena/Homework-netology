@@ -8,9 +8,8 @@
         //$pdo->set_charset('utf8');
         return $pdo;
     }
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST'  ) {
-            if (!empty($_POST['login']) && !empty($_POST['pass']) && empty($_POST['newLogin']) && empty($_POST['newPass'])){
+            if ( !empty($_POST['login']) && !empty($_POST['pass']) ){
                 $login = $_POST['login'];
                 $password = $_POST['pass'];
                 
@@ -19,7 +18,7 @@
                     die;
                 }
             }
-            if (!empty($_POST['newLogin']) && !empty($_POST['newPass']) && empty($_POST['login']) && empty($_POST['pass'])) {
+            if ( !empty($_POST['newLogin']) && !empty($_POST['newPass']) ) {
                   $login = $_POST['newLogin'];
                   $password = $_POST['newPass'];
                  
@@ -27,23 +26,24 @@
             }
         }
 
-
         function login($login, $password){
             $pdo = getPDO();
-            $sql = "SELECT id FROM user WHERE login=".$login." AND password=".$password;
-            $statement = $pdo->prepare($sql);
-            $statement->execute();
-            $empty = $statement->rowCount() === 0;
-            if(!$empty){
-                foreach ($statement as $row) {
-                  $_SESSION['id'] = $row['id'];
-                  return true;
-                }
-            } 
-            else {
+            //$hashed_password = crypt($password);
+
+                $sql = "SELECT id FROM user WHERE login=".$login." AND password=".$password;
+                $statement = $pdo->prepare($sql);
+                $statement->execute();
+                $empty = $statement->rowCount() === 0;
+                if(!$empty){
+                    foreach ($statement as $row) {
+                      $_SESSION['id'] = $row['id'];
+                      return true;
+                    }
+                } else {
                 echo "</br>Неверный пароль или логин!";
                 return false;
             }
+
         }
 
         function auth($newLogin, $newPassword){
@@ -52,21 +52,33 @@
             $statement = $pdo->prepare($sql);
             $statement->execute();
             $empty = $statement->rowCount() === 0;
+            //var_dump("INSERT INTO user(`login`, `password`) VALUES ($newLogin, $newPassword)");
             if($empty){
+                //$newLogin = $pdo->quote($newLogin);
+                //$newPassword = $pdo->quote($newPassword);
+                //var_dump($newLogin);
+                //var_dump($newPassword);
+
+                $hashed_password = crypt($newPassword);
+                //var_dump($hashed_password);
+
                 $sql1 = "INSERT INTO user(`login`, `password`) VALUES ($newLogin, $newPassword)";
+                //var_dump($sql1);
                     $statement1 = $pdo->prepare($sql1);
                     $statement1->execute();
-                    echo "Успех";
-                    login($newLogin, $newPassword);
+                    //echo "Успех";
+                    //login($newLogin, $newPassword);
+                    if ( login($newLogin, $newPassword) ){
+                        header('Location: index.php'); 
+                        die;
+                    }
             } 
             else {
                 echo "</br>Пользователь с таким логином уже существует!";
                 return false;
             }
         }
-
         
-
 ?>
 
 <!DOCTYPE html>
