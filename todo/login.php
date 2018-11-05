@@ -22,18 +22,25 @@
                   $login = $_POST['newLogin'];
                   $password = $_POST['newPass'];
                  
-                  auth($login, $password);
+                  if( auth($login, $password) ){
+                        header('Location: index.php'); 
+                        die;
+                  }
             }
         }
 
         function login($login, $password){
             $pdo = getPDO();
             //$hashed_password = crypt($password);
+            $login = $pdo->quote($login);
+            $password = $pdo->quote($password);
 
-                $sql = "SELECT id FROM user WHERE login=".$login." AND password=".$password;
+                $sql = 'SELECT id FROM user WHERE login='.$login.' AND password='.$password;
+                //var_dump($sql);
                 $statement = $pdo->prepare($sql);
                 $statement->execute();
                 $empty = $statement->rowCount() === 0;
+                //var_dump($statement->rowCount() );
                 if(!$empty){
                     foreach ($statement as $row) {
                       $_SESSION['id'] = $row['id'];
@@ -48,30 +55,28 @@
 
         function auth($newLogin, $newPassword){
             $pdo = getPDO();
-            $sql = "SELECT id FROM user WHERE login=$newLogin";
+            //$newLogin = $pdo->quote($newLogin);
+            //$newPassword = $pdo->quote($newPassword);
+            $sql = 'SELECT id FROM user WHERE login='.$newLogin;
             $statement = $pdo->prepare($sql);
             $statement->execute();
             $empty = $statement->rowCount() === 0;
             //var_dump("INSERT INTO user(`login`, `password`) VALUES ($newLogin, $newPassword)");
             if($empty){
-                //$newLogin = $pdo->quote($newLogin);
-                //$newPassword = $pdo->quote($newPassword);
-                //var_dump($newLogin);
-                //var_dump($newPassword);
 
                 $hashed_password = crypt($newPassword);
                 //var_dump($hashed_password);
 
-                $sql1 = "INSERT INTO user(`login`, `password`) VALUES ($newLogin, $newPassword)";
+                $sql1 = "INSERT INTO user(`login`, `password`) VALUES (".$newLogin.", ".$newPassword.")";
                 //var_dump($sql1);
                     $statement1 = $pdo->prepare($sql1);
                     $statement1->execute();
                     //echo "Успех";
-                    //login($newLogin, $newPassword);
-                    if ( login($newLogin, $newPassword) ){
-                        header('Location: index.php'); 
-                        die;
+                    if ( login($newLogin, $newPassword)){
+                        return true;
                     }
+                    
+                    
             } 
             else {
                 echo "</br>Пользователь с таким логином уже существует!";

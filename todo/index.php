@@ -2,6 +2,9 @@
 session_start();
 
 $userId =   $_SESSION['id'];
+if (empty($userId)){
+	die;
+}
 $pdo = new PDO("mysql:host=localhost;dbname=TODO;charset=utf8", "root", "", [
 	  PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 ]);
@@ -39,8 +42,9 @@ if (!empty($_POST['sort']) && !empty($_POST['sort_by'])) {
 		$statement = $pdo->prepare($sql);
 		$statement->execute();
 } else {
-		//var_dump($userId);
-		$sql = "SELECT * FROM task WHERE user_id=$userId";
+		//var_dump($_SESSION);
+		$userId = $pdo->quote($userId);
+		$sql = "SELECT * FROM task WHERE user_id=".$userId;
 		$statement = $pdo->prepare($sql);
     	$statement->execute();
 }
@@ -50,12 +54,17 @@ if (!empty($_POST['sort']) && !empty($_POST['sort_by'])) {
     	$astat->execute();
     	$assignedUserList = $astat->fetchAll(PDO::FETCH_ASSOC);
 
+    	$assigned_user_id = $pdo->quote($assigned_user_id);
+    	$task_id = $pdo->quote($task_id);
+    	$userId = $pdo->quote($userId);
+
     	if( !empty($_POST['assigned_user_id'] && !empty($_POST["task_id"])) ){
     		$assigned_user_id = $_POST['assigned_user_id'];
     		$task_id = $_POST["task_id"];
     		//var_dump($assigned_user_id);
     		//var_dump($task_id );
-    		
+   
+
 	    	$sql = "UPDATE task SET assigned_user_id=$assigned_user_id WHERE id=$task_id AND user_id=$userId";
 			$stat = $pdo->prepare($sql);
 			$stat->execute();
