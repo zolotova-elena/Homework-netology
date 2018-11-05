@@ -9,11 +9,12 @@
 
 	$testNumber = $_GET['x'];
 	//echo "Номер: $testNumber";
-	$filelist = glob("list/Test_$testNumber.json");
+	$filelist = glob("list/test_$testNumber.json");
 	//print_r($filelist);
 
 	if (!$filelist){ //echo "Теста с таким номером нет"; 
-		header('Location: http://phphttp/err404.php');
+		header("HTTP/1.0 404 Not Found");
+		die;
 	} else {
 	echo "<a href=list.php>Все тесты</a><br>";
 	$json = file_get_contents("$filelist[0]");
@@ -30,7 +31,7 @@
     <body>
 
 				<form action="" method="POST">
-	    		<?
+	    		<?php
 	    		$curAns = array();
 	    		for ($i = 0; $i < count($json); $i++){
 	    			$ques = $json[$i];
@@ -38,20 +39,20 @@
 
 	    			?>
 					<fieldset>
-						<legend> <? echo $ques['question'] ?> </legend>
-						<label><input type="radio" name="<? echo "q$i" ?>" value="<? echo $ques['answer1'] ?>"> <? echo $ques['answer1'] ?></label>
-						<label><input type="radio" name="<? echo "q$i" ?>" value="<? echo $ques['answer2'] ?>"> <? echo $ques['answer2'] ?></label>
-						<label><input type="radio" name="<? echo "q$i" ?>" value="<? echo $ques['answer3'] ?>"> <? echo $ques['answer3'] ?></label>
-						<label><input type="radio" name="<? echo "q$i" ?>" value="<? echo $ques['answer4'] ?>"> <? echo $ques['answer4'] ?></label>
+						<legend> <?php echo $ques['question'] ?> </legend>
+						<label><input type="radio" name="<? echo "q$i" ?>" value="<? echo $ques['answer1'] ?>"> <?php echo $ques['answer1'] ?></label>
+						<label><input type="radio" name="<? echo "q$i" ?>" value="<? echo $ques['answer2'] ?>"> <?php echo $ques['answer2'] ?></label>
+						<label><input type="radio" name="<? echo "q$i" ?>" value="<? echo $ques['answer3'] ?>"> <?php echo $ques['answer3'] ?></label>
+						<label><input type="radio" name="<? echo "q$i" ?>" value="<? echo $ques['answer4'] ?>"> <?php echo $ques['answer4'] ?></label>
 					</fieldset>			
-					<? 
+					<?php 
 				} 
 				?>
 					<input type="submit" value="Отправить">  
 				</form>
-				<?
+				<?php
 				$res = 0;
-				if (count($_POST) != count($json) ) {echo "Выберете ответы для каждого вопроса! "; die;};
+				if (count($_POST) != count($json) ) {echo 'Выберете ответы для каждого вопроса! '; die;};
 				for ($i = 0; $i < count($json); $i++){
 					if ($_POST["q$i"]){
 						$resForm = $_POST["q$i"];
@@ -63,13 +64,13 @@
 				}
 
 				if (!empty($_SESSION['user'])) {
-					$name = getAuthrizedUser()["username"];
+					$name = getAuthrizedUser()['username'];
 				} 
 				else {
 					$name = $_SESSION['name'];
 				}
 
-				echo "<h3>".$name.", результат: ".round($res*100/count($json))."%</h3>";
+				echo '<h3>'.$name.', результат: '.round($res*100/count($json)).'%</h3>';
 				echo "<a href=./logo.php?n=$name>Сертификат</a><br>";
 	    		
 	    	} 
@@ -78,4 +79,4 @@
 	    <a href="logout.php">Выход</a>
 	
     </body>
-</html>
+</html> 

@@ -1,4 +1,4 @@
-<?
+<?php 
 
 	require_once'functions.php';
 
@@ -11,11 +11,11 @@
 	if (!empty($_SESSION['user'])) {
 		echo "<h3>Вы вошли как зарегистрированный пользователь!</h3>";
 		echo "<a href=admin.php>Загрузить тест</a><br>";
-		showTests();
+		//showTests();
 	} 
 	else {
 		echo "<h3>Вы вошли как гость!</h3>";
-		showTests();
+		//showTests();
 	}
 
 	if ( !empty($_POST) ) { 
@@ -26,7 +26,7 @@
 		}
 		//header("Refresh:0");
 		
-		showTests();
+		//showTests();
 	}
 
 	function showTests(){
@@ -44,7 +44,7 @@
 	        //echo "num $testNumber <br>";
 	        if (!empty($_SESSION['user'])) {
 	        ?>
-	        	<input type="checkbox" name="Test_<?= $testNumber?>" value="Test_<?= $testNumber?>">
+	        	<input type="checkbox" name="Test_<?= $testNumber?>" value="test_<?= $testNumber?>">
 	        <?
 	    	}
 	        echo "<a href=./test.php?x=$testNumber> Test_$testNumber</a><br>";
@@ -76,7 +76,7 @@
 	<title>Список тестов</title>
 </head>
 <body>
-
+	<?php showTests(); ?>
 	<a href="logout.php"><button>Выход из системы</button></a>
 </body>
 </html>
