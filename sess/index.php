@@ -12,17 +12,6 @@
             die;
         }
   }
-  /*
-  $error = array();
-  if(!empty($_POST)) {
-    if (login($_POST['login'], $_POST['pass'])){
-      header('Location: list.php');
-        die;
-    } else {
-        $errors[] = 'Неверный логин или пароль'; 
-      }
-  }
-  */
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +31,7 @@
         <input type="text" name="pass" class="form-control" placeholder="Password" >
         <br>
         <br>
-        <h2>Если вы пользователь - авторизуйстесь</h2>
+        <h2>Если вы гость - введите Ваше имя</h2>
 
         <input name="name" id="name" placeholder="Ваше имя"> 
         <br>
