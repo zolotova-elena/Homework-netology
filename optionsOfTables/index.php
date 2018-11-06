@@ -1,5 +1,4 @@
 <?php
-	$adres = "index.php?n=";
 	$thisTable;
 	$pdo = new PDO("mysql:host=localhost;dbname=TBL;charset=utf8", "root", "", [
 		  PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
@@ -25,35 +24,42 @@
 		$tableInfo = $pdo->prepare("DESCRIBE $tableName");
 		$tableInfo->execute();
 	}
-	if ( !empty($_GET['n']) and !empty($_GET['table']) and !empty($_GET['updateField'])) {
+	
+	if ( !empty($_POST['n']) and !empty($_POST['table']) and ($_POST['action'] == 'updateField') )  {
 		if (!empty($_POST['new_name'])){
+			//echo "обновить имя";
 			$newName = $_POST['new_name'];
-			var_dump($newName);
-			$name = $_GET['n'];
-			$tn = $_GET['table'];
-			$stm = $pdo->prepare("ALTER TABLE $tn CHANGE $name $newName VARCHAR(50)");
+			$name = $_POST['n'];
+			$tn = $_POST['table'];
+			//$newName = $pdo->quote($newName);
+			//$name = $pdo->quote($name);
+			//$tn = $pdo->quote($tn);
+			$stm = $pdo->prepare("ALTER TABLE ".$tn." CHANGE ".$name." ".$newName." VARCHAR(50)");
 			$stm->execute();
-			header( 'Location: ./index.php?n=$tn');
+			//header( 'Location: ./index.php?n=$tn');
 		} 
 		
 	}
-	if ( !empty($_GET['n']) and !empty($_GET['table']) and !empty($_GET['updateType']) ) {
+	if ( !empty($_POST['n']) and !empty($_POST['table']) and $_POST['action'] == 'updateType' )  {
 		if (!empty($_POST['new_type'])){
 			$newType = $_POST['new_type'];
-			$name = $_GET['n'];
-			$tn = $_GET['table'];
-			$stm1 = $pdo->prepare("ALTER TABLE $tn MODIFY $name $newType");
+			$name = $_POST['n'];
+			$tn = $_POST['table'];
+			var_dump("ALTER TABLE ".$tn." MODIFY ".$name." ".$newType);
+			$stm1 = $pdo->prepare("ALTER TABLE ".$tn." MODIFY ".$name." ".$newType);
 			$stm1->execute();
-			header( 'Location: ./index.php?n=$tn');
+			//header( 'Location: ./index.php?n=$tn');
 		}
 	}
-	if ( !empty($_GET['n']) and !empty($_GET['table']) and !empty($_GET['delete']) ) {
-		$name = $_GET['n'];
-		$tn = $_GET['table'];
-		$stm2 = $pdo->prepare("ALTER TABLE $tn DROP COLUMN $name");
+	if ( !empty($_POST['n']) and !empty($_POST['table']) and $_POST['action'] == 'delete' ) {
+		//echo "удалить";
+		$name = $_POST['n'];
+		$tn = $_POST['table'];
+		$stm2 = $pdo->prepare("ALTER TABLE ".$tn." DROP COLUMN ".$name);
 		$stm2->execute();
-		header( 'Location: ./index.php?n=$tn');
+		//header( 'Location: ./index.php?n=$tn');
 	}
+	
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +88,7 @@
 	  		foreach ($tables as $row){
 				for($i = 0; $i < count($row); $i++){
 					?>
-					<li><a href="<?php echo $adres.$row[$i]; ?>"><?php echo "$row[$i]";?></a></li>
+					<li><a href="<?php echo "index.php?n=".$row[$i]; ?>"><?php echo "$row[$i]";?></a></li>
 					<?php
 				}
 		
