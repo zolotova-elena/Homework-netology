@@ -18,12 +18,6 @@
     $sql = "SHOW TABLES";
 	$tables = $pdo->prepare($sql);
 	$tables->execute();
-	if ( !empty($_GET['n']) ) {
-		$tableName = $_GET['n'];
-		$thisTable = $tableName;
-		$tableInfo = $pdo->prepare("DESCRIBE $tableName");
-		$tableInfo->execute();
-	}
 	
 	if ( !empty($_POST['n']) and !empty($_POST['table']) and ($_POST['action'] == 'updateField') )  {
 		if (!empty($_POST['new_name'])){
@@ -45,7 +39,7 @@
 			$newType = $_POST['new_type'];
 			$name = $_POST['n'];
 			$tn = $_POST['table'];
-			var_dump("ALTER TABLE ".$tn." MODIFY ".$name." ".$newType);
+			//var_dump("ALTER TABLE ".$tn." MODIFY ".$name." ".$newType);
 			$stm1 = $pdo->prepare("ALTER TABLE ".$tn." MODIFY ".$name." ".$newType);
 			$stm1->execute();
 			//header( 'Location: ./index.php?n=$tn');
@@ -58,6 +52,13 @@
 		$stm2 = $pdo->prepare("ALTER TABLE ".$tn." DROP COLUMN ".$name);
 		$stm2->execute();
 		//header( 'Location: ./index.php?n=$tn');
+	}
+
+	if ( !empty($_GET['n']) ) {
+		$tableName = $_GET['n'];
+		$thisTable = $tableName;
+		$tableInfo = $pdo->prepare("DESCRIBE $tableName");
+		$tableInfo->execute();
 	}
 	
 ?>
