@@ -1,7 +1,12 @@
 <?php
+	error_reporting(E_ALL);
+	ini_set("display_error", true);
+	ini_set("error_reporting", E_ALL);
+
 	$thisTable;
 	$pdo = new PDO("mysql:host=localhost;dbname=TBL;charset=utf8", "root", "", [
-		  PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+	//$pdo = new PDO("mysql:host=localhost;dbname=ezolotova;charset=utf8", "ezolotova", "neto1812", [
+		  PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_PERSISTENT => true
 	]);
 	/*
 	$sql = "CREATE TABLE `product` ( `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -86,14 +91,15 @@
 	  <h1>Информация о таблицах</h1>
 	  	<ul>
 	  	<?php 
-	  		foreach ($tables as $row){
-				for($i = 0; $i < count($row); $i++){
-					?>
-					<li><a href="<?php echo "index.php?n=".$row[$i]; ?>"><?php echo "$row[$i]";?></a></li>
-					<?php
-				}
-		
+	  		
+	  		$result = $tables->fetchAll();
+	  		
+	  		for($i = 0; $i < count($result); $i++){
+	  		//var_dump($result[$i][0]);
+	  		echo '<li><a href=index.php?n='.$result[$i][0].'>'.$result[$i][0].'</a></li>';
 			}
+		
+			
 	  	?>
 		</ul>
 	  	<table>
@@ -103,7 +109,8 @@
 	  			<td>Действие</td>
 	  		</tr>
 			<?php
-				if (!$tableInfo){die;}
+				if (empty($tableInfo)){die;}
+				else{
 				foreach ($tableInfo as $row) {
 					echo "<tr>";
 					echo "<td>".$row['Field']."</td>";
@@ -142,6 +149,7 @@
 				  	<?php
 					echo "</tr>";
 				}
+			}
 			?>
 	  		<tr>
 	  			
