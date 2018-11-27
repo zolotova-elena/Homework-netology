@@ -23,17 +23,24 @@
 
 				  	<thead>
 				    	<tr >
-					      	<th width=50%>Логин</th>
-					      	<th width=50%>Пароль</th>
+					      	<th width=25%>Логин</th>
+					      	<th width=25%>Пароль</th>
+					      	<th width=25%>Логин</th>
+					      	<th width=25%>Пароль</th>
 				    	</tr>
 				  	</thead>
 				  	<tbody>
+
 	      			<?php 
-	      			for ($i = 0; $i < count($dataArrayAdmins); $i++ ){
-	      				echo "<tr>
-	      						<td>$dataArrayAdmins[$i]['login']<td>
-	      						<td>$dataArrayAdmins[$i]['password']<td> 
-	      					 </tr>";
+	      			//var_dump($dataArrayQuestions);
+	      			for ($i = 0; $i < count($dataArrayQuestions); $i++ ){
+	      			//var_dump($i);
+	      				echo "<tr>".
+	      						"<td>".$dataArrayQuestions[$i]['question']."</td>".
+	      						"<td>".$dataArrayQuestions[$i]['answer']."</td>".
+	      						"<td>".$dataArrayQuestions[$i]['question_dateCreate']."</td>".
+	      						"<td>".$dataArrayQuestions[$i]['status']."</td>".
+	      					 "</tr>";
 	      			}
 
 	      			?>
@@ -46,7 +53,7 @@
 	      	<td> <a href="../controller/controller_dataPanel?action=topic">Темы</a> </td>
 	    </tr>
 	    <tr>
-	      	<td> <a href="../controller/controller_dataPanel?action=questions">Вопросы</a> </td>
+	      	<td> <a href="../controller/ccontroller_dataPanel?action=questions">Вопросы</a> </td>
 	    </tr>
 
 	  </tbody>

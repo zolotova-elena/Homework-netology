@@ -23,38 +23,44 @@
 <section class="cd-faq">
 	<ul class="cd-faq-categories">
 		<?php
+		$i = 0;
 		foreach ($allQues as $tName => $ques) {  
-			echo '<li><a class="selected" href="#'.$tName.'">'.$tName.'</a></li>';
+			if ($i == 0){
+				echo '<li><a class="selected" href="#'.$tName.'">'.$tName.'</a></li>';
+			} else {
+				echo '<li><a href="#'.$tName.'">'.$tName.'</a></li>';
+			}
+			
+			$i++;
 		}
 		?>
 	</ul> <!-- cd-faq-categories -->
 
 	<div class="cd-faq-items">
 		
-			<?php
-				//var_dump($allQues);
-				
-				foreach ($allQues as $tName => $ques) {  //$a as $k => $
-					echo '<ul id="'.$tName.'" class="cd-faq-group">';
-				
-					echo "<li class='cd-faq-title'><h2>$tName</h2></li>";
-					
-					for ($j = 0; $j < count($ques); $j++){
-						$q = $ques[$j];
-						//var_dump($q['question']);
-						
-						echo "<li>
-								<a class='cd-faq-trigger' href='#0'>".$q['question']."</a>
-								<div class='cd-faq-content'>
-									<p>".$q['answer']."</p>
-								</div>
-							</li>";
-					}
-					
-				}
-				echo '</ul> ';
-			?>
+		<?php
+			//var_dump($allQues);
 			
+			foreach ($allQues as $tName => $ques) {  //$a as $k => $
+				echo '<ul id="'.$tName.'" class="cd-faq-group">';
+			
+				echo "<li class='cd-faq-title'><h2>$tName</h2></li>";
+				
+				for ($j = 0; $j < count($ques); $j++){
+					$q = $ques[$j];
+					//var_dump($q['question']);
+					
+					echo "<li>
+							<a class='cd-faq-trigger' href='#0'>".$q['question']."</a>
+							<div class='cd-faq-content'>
+								<p>".$q['answer']."</p>
+							</div>
+						</li>";
+				}
+				
+			}
+			echo '</ul> ';
+		?>	
 		
 	</div> 
 	<a href="#0" class="cd-close-panel">Close</a>

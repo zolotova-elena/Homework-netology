@@ -28,12 +28,15 @@
 				    	</tr>
 				  	</thead>
 				  	<tbody>
+
 	      			<?php 
+	      			//var_dump($dataArrayAdmins);
 	      			for ($i = 0; $i < count($dataArrayAdmins); $i++ ){
-	      				echo "<tr>
-	      						<td>$dataArrayAdmins[$i]['login']<td>
-	      						<td>$dataArrayAdmins[$i]['password']<td> 
-	      					 </tr>";
+	      			//var_dump($i);
+	      				echo "<tr>".
+	      						"<td>".$dataArrayAdmins[$i]['login']."</td>".
+	      						"<td>".$dataArrayAdmins[$i]['password']."</td>".
+	      					 "</tr>";
 	      			}
 
 	      			?>

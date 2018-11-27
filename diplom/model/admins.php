@@ -7,10 +7,11 @@
 	}
 
 	class Admins {
-		$dataAdmins;
-		$pdo = getDB ();
-		function getAllAdmins(){
-			$sql = $pdo->prepare("SELECT `login`, `password` FROM users");
+		//$dataAdmins;
+		//public $pdo = getDB ();
+		public function getAllAdmins() {
+			$pdo = getDB ();
+			$sql = $pdo->prepare("SELECT login, password FROM users");
 			$sql->execute();
 			$dataAdmins = $sql-> fetchAll();
 			return $dataAdmins;
@@ -19,3 +20,5 @@
 
 	$dataAdmins = new Admins();
 	$dataArrayAdmins = $dataAdmins -> getAllAdmins();
+
+	
