@@ -1,21 +1,40 @@
 <?php
-	function getDB (){
-		$pdo = new PDO("mysql:host=localhost;dbname=diplom-php;charset=utf8", "root", "", [
-		  	PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_PERSISTENT => true
-		]);
-		return $pdo;
-	}
+	class Model_admins {
+		private $pdo;
 
-	class Admins {
-		$dataAdmins;
-		$pdo = getDB ();
-		function getAllAdmins(){
-			$sql = $pdo->prepare("SELECT `login`, `password` FROM users");
+		function __construct($pdo) {
+			$this->pdo = $pdo;
+		}
+
+		public 	function getUsers (){
+			$sql = $this->pdo->prepare("SELECT * FROM users");
+			$sql->execute();
+			$allUsers = $sql-> fetchAll();
+			return $allUsers; 
+		}
+	
+		public function getAllLoginsAndIds(){
+			$sql = $this->pdo->prepare("SELECT id, login FROM users");
 			$sql->execute();
 			$dataAdmins = $sql-> fetchAll();
 			return $dataAdmins;
 		}
-	}
 
-	$dataAdmins = new Admins();
-	$dataArrayAdmins = $dataAdmins -> getAllAdmins();
+		public function createAdmin ($newLog, $newPass){
+			$sql = $this->pdo->prepare("INSERT INTO users (login, password) VALUES ('".$newLog."', '".md5($newPass)."')");
+			$sql->execute();
+			return $sql; 
+		}
+
+		public function updateAdmin ($admin_id, $newPass){
+			$sql = $this->pdo->prepare("UPDATE users SET password ='".md5($newPass)."' WHERE id =".$admin_id);
+			$sql->execute();
+			return $sql; 
+		}
+
+		public  function deleteAdmin ($admin_id){
+			$sql = $this->pdo->prepare("DELETE FROM users WHERE id =".$admin_id);
+			$sql->execute();
+			return $sql; 
+		}
+	}

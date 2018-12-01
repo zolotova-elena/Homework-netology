@@ -17,25 +17,47 @@
 	  	</thead>
 	  	<tbody>
 	    <tr>
-	      	<td> <a href="../controller/controller_dataPanel.php?action=admins">Администраторы</a> </td>
+	      	<td> <a href="?nav=admins">Администраторы</a> </td>
 	      	<td rowspan="3" id="navResult">
+
+	      		<div>
+	      		<form method='POST' action='controller_admin.php?nav=admins'>
+	      			<input type='text' name='action' hidden value='createAdmin' >
+					<input type='text' name='newLog' value='' placeholder="Логин">
+					<input type='text' name='newPass' value='' placeholder="Пароль">
+					<input type='submit' value='Создать администратора'>
+				</form>
+	      		</div>
 		      	<table class="table">
 
 				  	<thead>
 				    	<tr >
-					      	<th width=50%>Логин</th>
-					      	<th width=50%>Пароль</th>
+					      	<th width=33%>Логин</th>
+					      	<th width=33%>Новый пароль</th>
+					      	<th width=33%></th>
 				    	</tr>
 				  	</thead>
 				  	<tbody>
 
 	      			<?php 
 	      			//var_dump($dataArrayAdmins);
-	      			for ($i = 0; $i < count($dataArrayAdmins); $i++ ){
+	      			for ($i = 0; $i < count($loginsAndIds); $i++ ){
 	      			//var_dump($i);
 	      				echo "<tr>".
-	      						"<td>".$dataArrayAdmins[$i]['login']."</td>".
-	      						"<td>".$dataArrayAdmins[$i]['password']."</td>".
+	      						"<td>".$loginsAndIds[$i]['login']."</td>".
+	      						"<td>"."<form method='POST' action='controller_admin.php?nav=admins'>
+	      									<input type='text' name='idAdmin' hidden value='".$loginsAndIds[$i]['id']."'>
+	      									<input type='text' name='action' hidden value='changeAdminPass'>
+											<input type='text' name='newPass'>
+											<input type='submit' value='Изменить'>
+    									</form>".
+    							"</td>".
+    							"<td>"."<form method='POST' action='controller_admin.php?nav=admins'>
+	      									<input type='text' name='idAdmin' hidden value='".$loginsAndIds[$i]['id']."'>
+	      									<input type='text' name='action' hidden value='deleteAdmin'>
+											<input type='submit'value='Удалить администратора'>
+    									</form>".
+    							"</td>".
 	      					 "</tr>";
 	      			}
 
@@ -46,14 +68,18 @@
 	      	</td>
 	    </tr>
 	    <tr>
-	      	<td> <a href="../controller/controller_dataPanel?action=topic">Темы</a> </td>
+	      	<td> <a href="?nav=topic">Темы</a> </td>
 	    </tr>
 	    <tr>
-	      	<td> <a href="../controller/controller_dataPanel?action=questions">Вопросы</a> </td>
+	      	<td> <a href="?nav=questions">Вопросы</a> </td>
 	    </tr>
 
 	  </tbody>
 	</table>
 	
+	<div>
+		<h3 style='text-align: center;'><?=$result?></h3>
+	</div>
+
 </body>
 </html>

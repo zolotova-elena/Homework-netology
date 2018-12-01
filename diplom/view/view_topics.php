@@ -31,9 +31,9 @@
 
 				  	<thead>
 				    	<tr >
-					      	<th width=20%>Вопрос</th>
-					      	<th width=20%>Дата создания</th>
-					      	<th width=20%>Ответ</th>
+					      	<th width=20%>Название</th>
+					      	<th width=20%>Всего вопросов</th>
+					      	<th width=20%>Опубликовано</th>
 					      	<th width=20%>Без ответа</th>
 					      	<th width=20%>Удалить</th>
 				    	</tr>
@@ -44,10 +44,15 @@
 	      				for ($i = 0; $i < count($topics); $i++ ){
 	      					echo '<tr>
 	      							  <td>'.$topics[$i]['topic_name'].'</td>
-	      							  <td></td>
-	      							  <td></td>
-	      							  <td></td>
-	      							  <td>'..'</td>
+	      							  <td>'.$topics[$i]['allCountQues'].'</td>
+	      							  <td>'.$topics[$i]['allQuesWait'].'</td>
+	      							  <td>'.$topics[$i]['allQuesWA'].'</td>
+	      							  <td>'.
+	      							  	"<form method='POST' action='controller_admin.php?nav=topic'>
+	      									<input type='text' name='topicId' hidden value='".$topics[$i]['id']."'>
+	      									<input type='text' name='action' hidden value='deleteTopic'>
+											<input type='submit'value='Удалить тему'>
+    									</form>".'</td>
 	      						  </tr>';
 	      				}
 	      			?>
