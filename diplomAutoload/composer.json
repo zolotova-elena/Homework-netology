@@ -1,0 +1,14 @@
+{
+    "name": "user/diplom",
+    "description": "progect",
+    "authors": [
+        {
+            "name": "Elena Zolotova",
+            "email": "lenazolotova1@rambler.ru"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {"Dip\\": "controller", "Dip1\\": "model"}
+    }
+}
