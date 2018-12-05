@@ -1,0 +1,20 @@
+{
+    "name": "user/diplom",
+    "description": "progect",
+    "authors": [
+        {
+            "name": "Elena Zolotova",
+            "email": "lenazolotova1@rambler.ru"
+        }
+    ],
+    "require": {},
+   // "autoload": {
+   // "psr-4": {"localhost\\": "Сontroller/", "localhost\\": "Model/"}
+    //"autoload": {
+      //  "files": ["Controller/ControllerAdmin.php","Controller/ControllerQuestion.php","Model/ModelAdmins.php","Model/ModelQuestions.php","Model/ModelTopic.php"]
+    //}
+"autoload": {
+    "psr-4": {"Сontroller\\": "Сontroller/", "Model\\": "Model/"}
+}
+}
+
