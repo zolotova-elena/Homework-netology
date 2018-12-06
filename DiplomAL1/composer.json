@@ -7,8 +7,10 @@
             "email": "lenazolotova1@rambler.ru"
         }
     ],
-    "autoload": {
-        "psr-4": {"Сontroller\\": "Сontroller/", "Model\\": "Model/"}
+
+   "autoload": {
+        "files": ["Controller/ControllerQuestions.php", "Controller/ControllerAdmin.php", 
+            "Model/ModelAdmins.php", "Model/ModelQuestions.php", "Model/ModelTopic.php"]
     }
 }
 

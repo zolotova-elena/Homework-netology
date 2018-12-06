@@ -6,33 +6,17 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit1bb941bed9b511626353258adbfd7e27
 {
-    public static $prefixLengthsPsr4 = array (
-        '�' => 
-        array (
-            'Сontroller\\' => 12,
-        ),
-        'M' => 
-        array (
-            'Model\\' => 6,
-        ),
-    );
-
-    public static $prefixDirsPsr4 = array (
-        'Сontroller\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/Сontroller',
-        ),
-        'Model\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/Model',
-        ),
+    public static $files = array (
+        '25b0d5a87ab4c41092af1585a36aa43d' => __DIR__ . '/../..' . '/Controller/ControllerQuestions.php',
+        'bc9321874be698638a9abbabee3a542c' => __DIR__ . '/../..' . '/Controller/ControllerAdmin.php',
+        'ca92b27d41af09ff20c3d69dcd6b84f3' => __DIR__ . '/../..' . '/Model/ModelAdmins.php',
+        '15e59f1eee9add9c7204c4cfdcf4597e' => __DIR__ . '/../..' . '/Model/ModelQuestions.php',
+        'e04ba19d717560172277e110f2b351e8' => __DIR__ . '/../..' . '/Model/ModelTopic.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit1bb941bed9b511626353258adbfd7e27::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit1bb941bed9b511626353258adbfd7e27::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }

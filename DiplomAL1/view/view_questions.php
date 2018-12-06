@@ -17,7 +17,7 @@
 	  	</thead>
 	  	<tbody>
 	    <tr>
-	      	<td> <a href="?nav=admins">Администраторы</a> </td>
+	      	<td> <a href="?nav=admins&contr=adm">Администраторы</a> </td>
 	      	<td rowspan="3" id="navResult">
 
 		      	<table class="table">
@@ -37,7 +37,7 @@
 	      					echo '<tr>
 	      							  <td>'.$allQues[$i]['question_dateCreate'].'</td>
 	      							  <td>'.
-	      							  		"<form method='POST' action='ControllerAdmin.php?nav=questions'>
+	      							  		"<form method='POST' action='index.php?nav=questions&contr=adm'>
 	      							  			<input type='text' name='topicId' hidden value='".$allQues[$i]['id']."'> 
 	      							  			<input type='text' name='action' hidden value='updQues'>  
 	      							  			<textarea name='newQues'>".$allQues[$i]['question']."</textarea>
@@ -47,7 +47,7 @@
 	      							  .'</td>
 	      							  <td>---</td>
 	      							  <td>'.
-	      							  	"<form method='POST' action='ControllerAdmin.php?nav=questions'>
+	      							  	"<form method='POST' action='index.php?nav=questions&contr=adm'>
 	      									<input type='text' name='topicId' hidden value='".$allQues[$i]['id']."'>
 	      									<input type='text' name='action' hidden value='deleteQues'>
 											<input type='submit'value='Удалить вопрос'>
@@ -61,10 +61,10 @@
 	      	</td>
 	    </tr>
 	    <tr>
-	      	<td> <a href="?nav=topic">Темы</a> </td>
+	      	<td> <a href="?nav=topic&contr=adm">Темы</a> </td>
 	    </tr>
 	    <tr>
-	      	<td> <a href="?nav=questions">Вопросы</a> </td>
+	      	<td> <a href="?nav=questions&contr=adm">Вопросы</a> </td>
 	    </tr>
 
 	  </tbody>
@@ -76,7 +76,7 @@
 
 	<br>
 	<div>
-		<a href="?nav=exit">Выйти</a>
+		<a href="?nav=exit&contr=adm">Выйти</a>
 	</div>
 
 </body>

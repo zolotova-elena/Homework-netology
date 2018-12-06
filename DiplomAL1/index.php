@@ -7,8 +7,20 @@
 	//include 'controller/controller_questions.php';
 	//echo $_GET;
 	//var_dump( $_GET);
-	$question = new ControllerQuestions();
-	$question -> checkQustions ();
+	
+	if (!empty($_GET)){
+		if ($_GET['contr'] == 'ques'){ //nav=exit
+			$question = new ControllerQuestions();
+			$question -> checkQustions ();
+		} else if ($_GET['contr'] == 'adm'){
+			$admin = new ControllerAdmin();
+			$admin -> checkInfoAndShow ();
+		}
+	} else {
+		$question = new ControllerQuestions();
+		$question -> checkQustions ();
+	}
+	
+	
 
-	$admin = new ControllerAdmin();
-	$admin -> checkInfoAndShow ();
+	

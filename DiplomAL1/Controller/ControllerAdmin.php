@@ -1,5 +1,5 @@
 <?php
-	namespace Controller;
+	//namespace Controller;
 	//require_once  '../vendor/autoload.php';
 	
 
@@ -188,14 +188,10 @@
 					include 'view/view_questions.php';
 
 				} else if ($_GET['nav'] == 'exit'){
-						//r($_GET['nav'] );
 						session_destroy(); 
-						include 'index.php';
-
-						//header("Location: ../index.php");
+						header("Location: index.php");
 				} else {
-					include 'view/view_adminsMenu.php';
-					//header("Location: ../view/view_adminsMenu.php");
+					include 'view/view_admins.php';
 				}
 			}
 

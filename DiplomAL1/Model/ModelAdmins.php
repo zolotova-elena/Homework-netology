@@ -1,5 +1,5 @@
 <?php
-	namespace Model;
+	//namespace Model;
 	//require_once  '../vendor/autoload.php';
 	class ModelAdmins 
 	{

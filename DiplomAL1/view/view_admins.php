@@ -19,11 +19,11 @@
 	  	</thead>
 	  	<tbody>
 	    <tr>
-	      	<td> <a href="?nav=admins">Администраторы</a> </td>
+	      	<td> <a href="?nav=admins&contr=adm">Администраторы</a> </td>
 	      	<td rowspan="3" id="navResult">
 
 	      		<div>
-	      		<form method='POST' action='index.php?nav=admins'>
+	      		<form method='POST' action='index.php?nav=admins&contr=adm'>
 	      			<input type='text' name='action' hidden value='createAdmin' >
 					<input type='text' name='newLog' value='' placeholder="Логин">
 					<input type='text' name='newPass' value='' placeholder="Пароль">
@@ -47,14 +47,14 @@
 	      			//var_dump($i);
 	      				echo "<tr>".
 	      						"<td>".$loginsAndIds[$i]['login']."</td>".
-	      						"<td>"."<form method='POST' action='ControllerAdmin.php?nav=admins'>
+	      						"<td>"."<form method='POST' action='index.php?nav=admins&contr=adm'>
 	      									<input type='text' name='idAdmin' hidden value='".$loginsAndIds[$i]['id']."'>
 	      									<input type='text' name='action' hidden value='changeAdminPass'>
 											<input type='text' name='newPass'>
 											<input type='submit' value='Изменить'>
     									</form>".
     							"</td>".
-    							"<td>"."<form method='POST' action='ControllerAdmin.php?nav=admins'>
+    							"<td>"."<form method='POST' action='index.php?nav=admins&contr=adm'>
 	      									<input type='text' name='idAdmin' hidden value='".$loginsAndIds[$i]['id']."'>
 	      									<input type='text' name='action' hidden value='deleteAdmin'>
 											<input type='submit'value='Удалить администратора'>
@@ -70,10 +70,10 @@
 	      	</td>
 	    </tr>
 	    <tr>
-	      	<td> <a href="?nav=topic">Темы</a> </td>
+	      	<td> <a href="?nav=topic&contr=adm">Темы</a> </td>
 	    </tr>
 	    <tr>
-	      	<td> <a href="?nav=questions">Вопросы</a> </td>
+	      	<td> <a href="?nav=questions&contr=adm">Вопросы</a> </td>
 	    </tr>
 
 	  </tbody>
@@ -85,7 +85,7 @@
 
 	<br>
 	<div>
-		<a href="?nav=exit">Выйти</a>
+		<a href="?nav=exit&contr=adm">Выйти</a>
 	</div>
 
 </body>

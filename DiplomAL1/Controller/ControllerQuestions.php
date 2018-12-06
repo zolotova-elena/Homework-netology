@@ -1,5 +1,5 @@
 <?php
-	namespace Controller;
+	//namespace Controller;
 	//require_once  '../vendor/autoload.php';
 
 	
