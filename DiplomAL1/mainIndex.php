@@ -25,6 +25,7 @@
 	<ul class="cd-faq-categories">
 		<?php
 		$i = 0;
+		if (count($allQues) == 0) die;
 		foreach ($allQues as $tName => $ques) {  
 			if ($i == 0){
 				echo '<li><a class="selected" href="#'.$tName.'">'.$tName.'</a></li>';

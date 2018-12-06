@@ -144,7 +144,7 @@
 							if(!empty($_POST['quesId']) and !empty($_POST['thisTopic']) ){
 								$quesId = $_POST['quesId'];
 								$thisTopic = $_POST['thisTopic'];
-								$ques = $questions -> updAnswer ($quesId, $thisTopic);
+								$ques = $questions -> updTopic ($quesId, $thisTopic);
 								$result = 'Тема изменена'; 
 							}
 

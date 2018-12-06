@@ -23,12 +23,12 @@
 	      	<td rowspan="3" id="navResult">
 
 	      		<div>
-	      		<form method='POST' action='index.php?nav=admins&contr=adm'>
-	      			<input type='text' name='action' hidden value='createAdmin' >
-					<input type='text' name='newLog' value='' placeholder="Логин">
-					<input type='text' name='newPass' value='' placeholder="Пароль">
-					<input type='submit' value='Создать администратора'>
-				</form>
+		      		<form method='POST' action='index.php?nav=admins&contr=adm'>
+		      			<input type='text' name='action' hidden value='createAdmin' >
+						<input type='text' name='newLog' value='' placeholder="Логин">
+						<input type='text' name='newPass' value='' placeholder="Пароль">
+						<input type='submit' value='Создать администратора'>
+					</form>
 	      		</div>
 		      	<table class="table">
 

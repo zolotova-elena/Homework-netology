@@ -50,7 +50,7 @@
 	      							  <td>'.$topics[$i]['allShow'].'</td>
 	      							  <td>'.$topics[$i]['allWait'].'</td>
 	      							  <td>'.
-	      							  	"<form method='POST' action='ControllerAdmin.php?nav=topic&contr=adm'>
+	      							  	"<form method='POST' action='index.php?nav=topic&contr=adm'>
 	      									<input type='text' name='topicId' hidden value='".$topics[$i]['id']."'>
 	      									<input type='text' name='action' hidden value='deleteTopic'>
 											<input type='submit'value='Удалить тему'>

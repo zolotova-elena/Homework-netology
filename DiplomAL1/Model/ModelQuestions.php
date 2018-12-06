@@ -85,11 +85,13 @@
 		}
 
 		public function updTopic ($quesId, $newTopic){
+			//var_dump("UPDATE questions SET id_topic='".$newTopic."' WHERE id =".$quesId);
 			$sql = $this->pdo->prepare("UPDATE questions SET id_topic='".$newTopic."' WHERE id =".$quesId);
 			$sql->execute();
 		}
 
 		public function updAnswer ($quesId, $newAns){
+			var_dump("UPDATE questions SET answer='".$newAns."' WHERE id =".$quesId);
 			$sql = $this->pdo->prepare("UPDATE questions SET answer='".$newAns."' WHERE id =".$quesId);
 			$sql->execute();
 		}
