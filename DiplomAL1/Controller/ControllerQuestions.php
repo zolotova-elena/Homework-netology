@@ -1,11 +1,11 @@
 <?php
-namespace Controller;
-require_once  '../vendor/autoload.php';
+	namespace Controller;
+	//require_once  '../vendor/autoload.php';
 
 	
 
-	$question = new ControllerQuestions();
-	$question -> checkQustions ();
+	//$question = new ControllerQuestions();
+	//$question -> checkQustions ();
 	
 	class ControllerQuestions {
 		private function getDB (){
@@ -35,14 +35,14 @@ require_once  '../vendor/autoload.php';
 					//include '../model/model_topic.php';
 					$dataTopic = new ModelTopic($this->getDB ());
 					$topics = $dataTopic -> getTopics();
-					include '../view/view_quesForm.php';
+					include 'view/view_quesForm.php';
 
 				} else {
 					$result = 'Ошибка в данных';
 					//include '../model/model_topic.php';
 					$dataTopic = new ModelTopic($this->getDB ());
 					$topics = $dataTopic -> getTopics();
-					include '../view/view_quesForm.php';
+					include 'view/view_quesForm.php';
 				}
 			} else {
 
@@ -52,7 +52,7 @@ require_once  '../vendor/autoload.php';
 						//include '../model/model_topic.php';
 						$dataTopic = new ModelTopic($this->getDB ());
 						$topics = $dataTopic -> getTopics();
-						include '../view/view_quesForm.php';
+						include 'view/view_quesForm.php';
 					}
 				} else {
 					//include 'model/model_topic.php';

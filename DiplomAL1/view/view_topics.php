@@ -21,7 +21,7 @@
 	      	<td rowspan="3" id="navResult">
 
 	      		<div style="margin-bottom: 10px;">
-	      		<form method='POST' action='ControllerAdmin.php?nav=topic'>
+	      		<form method='POST' action='index.php?nav=topic'>
 	      			<input type='text' name='action' hidden value='createTopic' >
 					<input type='text' name='newTopicName' value='' placeholder="Название темы">
 					<input type='submit' value='Создать тему'>
@@ -90,7 +90,7 @@
 	      							if ($questionsByTopic[$j]['status'] == 'wait'){
 	      								$status = $questionsByTopic[$j]['status'];
 	      							} else if ($questionsByTopic[$j]['status'] == 'block') {
-	      								$status = "<form method='POST' action='ControllerAdmin.php?nav=topic'>
+	      								$status = "<form method='POST' action='index.php?nav=topic'>
 		      							  			<input type='text' name='quesId' hidden value='".$questionsByTopic[$j]['id']."'> 
 		      							  			<input type='text' name='action' hidden value='changeStatus'>  
 		      							  			".'<select name="newStatus">
@@ -100,7 +100,7 @@
 		      							  			<input type='submit'value='Изменить статус'>
 	      							  			</form>";
 	      							} else if ($questionsByTopic[$j]['status'] == 'show'){
-	      								$status = "<form method='POST' action='ControllerAdmin.php?nav=topic'>
+	      								$status = "<form method='POST' action='index.php?nav=topic'>
 		      							  			<input type='text' name='quesId' hidden value='".$questionsByTopic[$j]['id']."'> 
 		      							  			<input type='text' name='action' hidden value='changeStatus'>  
 		      							  			".'<select name="newStatus">
@@ -112,7 +112,7 @@
 	      							}
 
 	      							echo   '<tr><td>'.
-	      										"<form method='POST' action='ControllerAdmin.php?nav=topic'>
+	      										"<form method='POST' action='index.php?nav=topic'>
 		      							  			<input type='text' name='quesId' hidden value='".$questionsByTopic[$j]['id']."'> 
 		      							  			<input type='text' name='action' hidden value='changQues'>  
 		      							  			<textarea name='newQues'>".$questionsByTopic[$j]['question']."</textarea>
@@ -124,7 +124,7 @@
 	      										$status
 	      									.'</td>
 	      									<td>'.
-	      										"<form method='POST' action='ControllerAdmin.php?nav=topic'>
+	      										"<form method='POST' action='index.php?nav=topic'>
 		      							  			<input type='text' name='quesId' hidden value='".$questionsByTopic[$j]['id']."'> 
 		      							  			<input type='text' name='action' hidden value='changAuthor'>  
 		      							  			<input type='text' name='newAuthor' value='".$questionsByTopic[$j]['question_authorName']."'> 
@@ -133,7 +133,7 @@
 	      							  			</form>"
 	      									.'</td>
 	      									<td>'.
-	      										"<form method='POST' action='ControllerAdmin.php?nav=topic'>
+	      										"<form method='POST' action='index.php?nav=topic'>
 		      							  			<input type='text' name='quesId' hidden value='".$questionsByTopic[$j]['id']."'> 
 		      							  			<input type='text' name='action' hidden value='changAnswer'>  
 		      							  			<textarea name='newAns'>".$questionsByTopic[$j]['answer']."</textarea>
@@ -145,14 +145,14 @@
 	      							  			</form>"
 	      									.'</td>
 	      									<td>'.
-	      										"<form method='POST' action='ControllerAdmin.php?nav=topic'>
+	      										"<form method='POST' action='index.php?nav=topic'>
 	      										<input type='text' name='quesId' hidden value='".$questionsByTopic[$j]['id']."'>
 	      										<input type='text' name='action' hidden value='changTopic'>".$selectTopic."
 												<input type='submit'value='Изменить тему'>
     											</form>"
 	      									.'</td>
 	      									<td>'.
-	      										"<form method='POST' action='ControllerAdmin.php?nav=topic'>
+	      										"<form method='POST' action='index.php?nav=topic'>
 	      										<input type='text' name='quesId' hidden value='".$questionsByTopic[$j]['id']."'>
 	      										<input type='text' name='action' hidden value='deleteQues'>
 												<input type='submit'value='Удалить вопрос'>

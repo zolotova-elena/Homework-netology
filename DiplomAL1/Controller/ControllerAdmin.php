@@ -1,10 +1,10 @@
 <?php
 	namespace Controller;
-require_once  '../vendor/autoload.php';
-	session_start();
+	//require_once  '../vendor/autoload.php';
+	
 
-	$admin = new ControllerAdmin();
-	$admin -> checkInfoAndShow ();
+	//$admin = new ControllerAdmin();
+	//$admin -> checkInfoAndShow ();
 
 	class ControllerAdmin {
 
@@ -42,7 +42,7 @@ require_once  '../vendor/autoload.php';
 
 					if (!empty($isAdmin)){
 						$_SESSION['u_id'] = $isAdmin; 
-						include '../view/view_admins.php';
+						include 'view/view_admins.php';
 					} else {
 						echo 'Ошибка авторизации';
 					}
@@ -81,7 +81,7 @@ require_once  '../vendor/autoload.php';
 					}
 
 					$loginsAndIds = $admin -> getAllLoginsAndIds();
-					include '../view/view_admins.php';
+					include 'view/view_admins.php';
 
 				} else if ($_GET['nav'] == 'topic'){
 					$result = '';
@@ -159,7 +159,7 @@ require_once  '../vendor/autoload.php';
 
 					$topics = $topic -> getCountTopics();
 					$topics = $questions -> getAllQuesForShowInAdminPanel ($topics);
-					include '../view/view_topics.php';
+					include 'view/view_topics.php';
 
 				} else if ($_GET['nav'] == 'questions'){
 					//include '../model/model_questions.php';
@@ -185,14 +185,17 @@ require_once  '../vendor/autoload.php';
 					}
 
 					$allQues = $questions ->  getAllQuesWAnth();
-					include '../view/view_questions.php';
+					include 'view/view_questions.php';
 
 				} else if ($_GET['nav'] == 'exit'){
 						//r($_GET['nav'] );
 						session_destroy(); 
-						header("Location: ../index.php");
+						include 'index.php';
+
+						//header("Location: ../index.php");
 				} else {
-					header("Location: ../view/view_adminsMenu.php");
+					include 'view/view_adminsMenu.php';
+					//header("Location: ../view/view_adminsMenu.php");
 				}
 			}
 

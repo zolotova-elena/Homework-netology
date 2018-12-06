@@ -13,7 +13,7 @@
 </head>
 <body>
 <div style="vertical-align: top; text-align: right; cursor: pointer;"> 
-	<a href="Сontroller/СontrollerQuestions.php?act=showForm"> <span class="glyphicon glyphicon-send"></span></a> 
+	<a href="index.php?act=showForm"> <span class="glyphicon glyphicon-send"></span></a> 
 	<a href="view/login.html"> <span class="glyphicon glyphicon-user"></span></a> 
 </div>
 

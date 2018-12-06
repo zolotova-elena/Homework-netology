@@ -1,6 +1,6 @@
 <?php
-namespace Model
-require_once  '../vendor/autoload.php';
+	namespace Model;
+	//require_once  '../vendor/autoload.php';
 	class ModelAdmins 
 	{
 		private $pdo;

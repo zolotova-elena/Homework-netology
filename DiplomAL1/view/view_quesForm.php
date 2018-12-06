@@ -17,7 +17,7 @@
 			?>
 		</div>
 
-		<form action="../Controller/ControllerQuestions.php" method="POST">
+		<form action="../index.php" method="POST">
 			
 			<input type="text" name='isSend' value="true" hidden>
 			

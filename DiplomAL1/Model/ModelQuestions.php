@@ -1,6 +1,6 @@
 <?php 
-namespace Model
-require_once  '../vendor/autoload.php';
+	namespace Model;
+	//require_once  '../vendor/autoload.php';
 	class ModelQuestions 
 	{
 		private $pdo;
@@ -20,7 +20,7 @@ require_once  '../vendor/autoload.php';
 
 		public	function getAllQues ($topics){
 				//$pdo = getDB ();
-				$result;
+				$result = [];
 				
 				for ($i = 0; $i < count($topics); $i++){
 					$questions = Array();
